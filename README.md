@@ -1,6 +1,9 @@
 # DatathonRD2020
 Repositorio para competencia Datathon RD 2020
 
+### Fecha:
+* Viernes 26 de junio al domingo 28 de junio.
+
 ### Enlace al evento
 https://www.eventbrite.com/e/datathon-2020-tickets-99125768843
 

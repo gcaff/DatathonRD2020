@@ -3,7 +3,6 @@ library(dplyr)
 
 unpop <- read.csv("../../data/indicadores/WPP2019_PopulationByAgeSex_Medium.csv")
 
-
 unpop_65 <- unpop %>%
   filter(Time == 2019) %>% # tomo 2019 pq 2020 es una proyeccion
   filter(AgeGrpStart >= 65) %>%

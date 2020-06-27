@@ -1,4 +1,4 @@
-d <- read.csv("../../data/data.csv")
+d <- read.csv("../../data/DATA_RETO_2.csv")
 
 dd <- d[,1:14]
 y <- d$cumulative_cases

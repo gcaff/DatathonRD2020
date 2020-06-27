@@ -93,7 +93,7 @@ datosWB$name[datosWB$name == "Physicians (per 1,000 people)"] <- "num_physicians
 datosWB$name[datosWB$name == "Literacy rate, adult total (% of people ages 15 and above)"] <- "lit_rate"
 
 datosWB <- datosWB %>%
-  filter(name %in% c("extreme_poverty"))
+  filter(!(name %in% c("extreme_poverty")))
   spread(key=name,value = indicador)
 
 dd6 <- dd5 %>%

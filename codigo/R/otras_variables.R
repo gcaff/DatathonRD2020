@@ -83,7 +83,7 @@ datosWB <- datosWB %>%
 
 datosWB$name[datosWB$name == "GDP per capita, PPP (current international $)"] <- "gdp_per_capita_ppp"
 datosWB$name[datosWB$name == "Poverty headcount ratio at $1.90 a day (2011 PPP) (% of population)"] <- "extreme_poverty"
-datosWB$name[datosWB$name == "Mortality from CVD, cancer, diabetes or CRD between exact ages 30 and 70 (%)"] <- "cvd_mortality"
+datosWB$name[datosWB$name == "Mortality from CVD, cancer, diabetes or CRD between exact ages 30 and 70 (%)"] <- "non_transm_mortality"
 datosWB$name[datosWB$name == "Diabetes prevalence (% of population ages 20 to 79)"] <- "diabetes"
 datosWB$name[datosWB$name == "Current health expenditure (% of GDP)"] <- "expend_health_tot"
 datosWB$name[datosWB$name == "Domestic general government health expenditure (% of GDP)"] <- "expend__health_public"
@@ -93,7 +93,7 @@ datosWB$name[datosWB$name == "Physicians (per 1,000 people)"] <- "num_physicians
 datosWB$name[datosWB$name == "Literacy rate, adult total (% of people ages 15 and above)"] <- "lit_rate"
 
 datosWB <- datosWB %>%
-  filter(name %in% c("extreme_poverty","cvd_mortality"))
+  filter(name %in% c("extreme_poverty"))
   spread(key=name,value = indicador)
 
 dd6 <- dd5 %>%

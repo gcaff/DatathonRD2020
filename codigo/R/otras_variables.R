@@ -109,24 +109,28 @@ cities1 <- cities %>%
   count() %>%
   rename(n_cities_1=n)
 
+# ciudades con mas de 1,000,000 hab
 cities2 <- cities %>%
   filter(population > 1e6) %>%
   group_by(iso3) %>%
   count() %>%
   rename(n_cities_2=n)
 
+# ciudades con mas de 5,000,000 hab
 cities3 <- cities %>%
   filter(population > 5e6) %>%
   group_by(iso3) %>%
   count() %>%
   rename(n_cities_3=n)
 
+# ciudades con mas de 10,000,000 hab
 cities4 <- cities %>%
   filter(population > 1e7) %>%
   group_by(iso3) %>%
   count() %>%
   rename(n_cities_4=n)
 
+# concatenar
 cities <- cities1 %>%
   left_join(cities2,by="iso3") %>%
   left_join(cities3,by="iso3") %>%
@@ -142,3 +146,26 @@ dd7 %>%
   write.csv(file = "../../data/otros_indicadores/otros_indicadores.csv",
             row.names = F)
 
+#193 us
+#187 turkey
+#96 italy
+#173 spain
+#39 china
+#98 japan
+
+# estandarizar
+dx <- d
+dx$population <- log(dx$population)
+dx$cumulative_cases <- log(dx$cumulative_cases)
+dx$gdp_per_capita <- log(dx$gdp_per_capita)
+
+dx <- (dx[,-(1:6)]-colMeans(dx[,-(1:6)],na.rm = T))/apply(dx[,-(1:6)],2,function(x) sd(x,na.rm = T))
+
+dx <- dx[c(39,96,98,173,187,193),-34]
+tdx <- t(dx)
+
+pairs(tdx)
+
+tdx[,c(4,6)]
+
+  

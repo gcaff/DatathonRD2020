@@ -93,14 +93,52 @@ datosWB$name[datosWB$name == "Physicians (per 1,000 people)"] <- "num_physicians
 datosWB$name[datosWB$name == "Literacy rate, adult total (% of people ages 15 and above)"] <- "lit_rate"
 
 datosWB <- datosWB %>%
-  filter(!(name %in% c("extreme_poverty")))
+  filter(!(name %in% c("extreme_poverty"))) %>%
   spread(key=name,value = indicador)
 
 dd6 <- dd5 %>%
   left_join(datosWB, by="iso")
 
+# ciudades
+cities <- readxl::read_xlsx("../../data/otros_indicadores/worldcities.xlsx",sheet = 1)
 
-dd6 %>%
+# ciudades con mas de 100,000 hab
+cities1 <- cities %>%
+  filter(population > 1e5) %>%
+  group_by(iso3) %>%
+  count() %>%
+  rename(n_cities_1=n)
+
+cities2 <- cities %>%
+  filter(population > 1e6) %>%
+  group_by(iso3) %>%
+  count() %>%
+  rename(n_cities_2=n)
+
+cities3 <- cities %>%
+  filter(population > 5e6) %>%
+  group_by(iso3) %>%
+  count() %>%
+  rename(n_cities_3=n)
+
+cities4 <- cities %>%
+  filter(population > 1e7) %>%
+  group_by(iso3) %>%
+  count() %>%
+  rename(n_cities_4=n)
+
+cities <- cities1 %>%
+  left_join(cities2,by="iso3") %>%
+  left_join(cities3,by="iso3") %>%
+  left_join(cities4,by="iso3") %>%
+  rename(iso=iso3)
+
+cities[is.na(cities)] <- 0
+  
+dd7 <- dd6 %>%
+  left_join(cities, by="iso")
+
+dd7 %>%
   write.csv(file = "../../data/otros_indicadores/otros_indicadores.csv",
             row.names = F)
 

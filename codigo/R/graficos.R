@@ -7,10 +7,10 @@ d <- read.csv("../../data/DATA_RETO_2.csv")
 d$log_pop <- log(d$population)
 
 p1 <- qplot(d$population, fill = "niveles") +
-  theme_minimal()
+  theme_dark()
 
 p2 <- qplot(d$log_pop, fill = "log") +
-  theme_minimal()
+  theme_dark()
 
 ggsave("../../img/pop_lvl.png",p1)
 ggsave("../../img/pop_log.png",p2)

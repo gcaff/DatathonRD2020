@@ -153,19 +153,19 @@ dd7 %>%
 #39 china
 #98 japan
 
-# estandarizar
-dx <- d
-dx$population <- log(dx$population)
-dx$cumulative_cases <- log(dx$cumulative_cases)
-dx$gdp_per_capita <- log(dx$gdp_per_capita)
-
-dx <- (dx[,-(1:6)]-colMeans(dx[,-(1:6)],na.rm = T))/apply(dx[,-(1:6)],2,function(x) sd(x,na.rm = T))
-
-dx <- dx[c(39,96,98,173,187,193),-34]
-tdx <- t(dx)
-
-pairs(tdx)
-
-tdx[,c(4,6)]
+# # estandarizar
+# dx <- d
+# dx$population <- log(dx$population)
+# dx$cumulative_cases <- log(dx$cumulative_cases)
+# dx$gdp_per_capita <- log(dx$gdp_per_capita)
+# 
+# dx <- (dx[,-(1:6)]-colMeans(dx[,-(1:6)],na.rm = T))/apply(dx[,-(1:6)],2,function(x) sd(x,na.rm = T))
+# 
+# dx <- dx[c(39,96,98,173,187,193),-34]
+# tdx <- t(dx)
+# 
+# pairs(tdx)
+# 
+# tdx[,c(4,6)]
 
   

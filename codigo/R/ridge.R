@@ -10,8 +10,20 @@ d_tree$log_turismo_18 <- d_tree$log_turismo >= 17.58
 d_tree$int_1 <- d_tree$businesses_and_public_services_closure*d_tree$log_turismo_18
 
 d_sub <- d_tree[,-c(1:3,59,61)]
+
+# standardize
+d_sub$cumulative_cases <- log(d_sub$cumulative_cases)
+
+sd_d_sub <- apply(d_sub,2,sd)
+mean_d_sub <- colMeans(d_sub)
+
+
+
+
+d_sub1 <- t(t(d_sub - matrix(rep(colMeans(d_sub),nrow(d_sub)),ncol(d_sub),ncol(d_sub)))/sd_d_sub)
+
 X = model.matrix(cumulative_cases~.,d_sub)[,-60]
-y = log(d_tree$cumulative_cases)
+y = d_tree$cumulative_cases
 
 grid=10^seq(10,-2,length=100)
 

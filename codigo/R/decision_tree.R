@@ -1,6 +1,7 @@
 # Classification Tree with rpart
 library(rpart)
 library(tree)
+library(dplyr)
 
 d_in <- read.csv("../../data/inputs.csv")
 d_target <- read.csv("../../data/target.csv")
@@ -21,7 +22,16 @@ mean(abs(predict(lmfit)-d$cumulative_cases))
 # grow tree 
 fit <- tree(cumulative_cases ~ . - cumulative_cases, data=d_tree)
 
+fit.cv <- cv.tree(fit)
+
 summary(fit)
+summary(fit.cv)
+fit.cv
+
+prune.fit <- prune.tree(fit,best=3)
+text(fit,pretty=0)
+
+predict(prune.fit)
 
 plot(fit)
 text(fit,pretty=0)
